@@ -5,7 +5,7 @@
 # Author: Andrew Hersh <etch.himself@gmail.com> 
 #---------------------------------------------------------------
 
-check_is_sudo() {
+check_for_sudo() {
     if [ "$EUID" -ne 0 ]; then
         echo "Please run as root."
         exit
@@ -27,8 +27,9 @@ check_for_brew(){ # there is an assumption here that the target system has ruby 
 install_brew_stuff(){
     
     echo "Installing..."
-    brew install git tmux python vim
-    brew cask install google-chrome spectacle
+    brew install git tmux python vim shellcheck reattach-to-user-namespace 
+
+    brew cask install google-chrome spectacle iterm2 atext 
 }
 
 switch_default_app_links(){
@@ -46,12 +47,16 @@ install_vundle(){
 
 get_dotfiles(){
 
-	git clone https://github.com/droo5ki/dotfiles.git
+    cd "$HOME" || exit
+	git clone https://github.com/droo5ki/dotfiles.git 
+    mv dotfiles .dotfiles 
+    cd .dotfiles || exit
+    find $(pwd) -name "*.rc" -exec "ln -snf {} $HOME/{}" \;
 }
 
 main(){
 
-	check_is_sudo
+    check_for_sudo 
 	check_for_brew
 	install_vundle
 	get_dotfiles
