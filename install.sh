@@ -28,8 +28,7 @@ install_brew_stuff(){
     
     echo "Installing..."
     brew install git tmux python vim shellcheck reattach-to-user-namespace 
-
-    brew cask install google-chrome spectacle iterm2 atext 
+    brew cask install google-chrome spectacle iterm2 atext caffeine
 }
 
 switch_default_app_links(){
@@ -51,7 +50,7 @@ get_dotfiles(){
 	git clone https://github.com/droo5ki/dotfiles.git 
     mv dotfiles .dotfiles 
     cd .dotfiles || exit
-    find $(pwd) -name "*.rc" -exec "ln -snf {} $HOME/{}" \;
+    find $(pwd) -name ".*rc" | cut -d "/" -f5 | xargs -I {} "ln -snf $HOME/.dotfiles/{} $HOME/test/{}"
 }
 
 main(){
