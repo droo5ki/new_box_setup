@@ -12,7 +12,7 @@ check_for_sudo() {
     fi
 }
 
-check_for_brew(){ # there is an assumption here that the target system has ruby installed. 
+check_for_brew_and_install(){ # there is an assumption here that the target system has ruby installed. 
 
 	if [[ -e /usr/local/bin/brew ]]; then
 		echo "Brew installed, moving on."
@@ -38,9 +38,10 @@ switch_default_app_links(){
 	true;
 }
 
-install_vundle(){
+setup_vim(){
 
-	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	git clone "https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
+    ln -snf "$HOME/.dotfile/vim/codeschool.vim $HOME/.vim/colors/codeschool.vim"
 
 }
 
@@ -50,15 +51,23 @@ get_dotfiles(){
 	git clone https://github.com/droo5ki/dotfiles.git 
     mv dotfiles .dotfiles 
     cd .dotfiles || exit
-    find $(pwd) -name ".*rc" | cut -d "/" -f5 | xargs -I {} "ln -snf $HOME/.dotfiles/{} $HOME/{}"
+    find "$(pwd) -name '.*rc' | cut -d '/' -f5 | xargs -I {} 'ln -snf $HOME/.dotfiles/{} $HOME/{}'"
+}
+
+install_oh_my_zsh(){
+
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
 }
 
 main(){
 
     check_for_sudo 
-	check_for_brew
-	install_vundle
+	check_for_brew_and_install
+    install_oh_my_zsh
 	get_dotfiles
+	setup_vim
+
 
 }
 
