@@ -50,7 +50,7 @@ get_dotfiles(){
 	git clone https://github.com/droo5ki/dotfiles.git 
     mv dotfiles .dotfiles 
     cd .dotfiles || exit
-    find $(pwd) -name ".*rc" | cut -d "/" -f5 | xargs -I {} "ln -snf $HOME/.dotfiles/{} $HOME/test/{}"
+    find $(pwd) -name ".*rc" | cut -d "/" -f5 | xargs -I {} "ln -snf $HOME/.dotfiles/{} $HOME/{}"
 }
 
 main(){
