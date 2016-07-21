@@ -40,9 +40,17 @@ switch_default_app_links(){
 
 setup_vim(){
 
-	git clone "https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
-    ln -snf "$HOME/.dotfile/vim/codeschool.vim $HOME/.vim/colors/codeschool.vim"
-
+    if [[ -e $HOME/.vim/ ]]; then
+	    git clone "https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
+    else
+	    mkdir "$HOME/.vim"
+	    git clone "https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
+    fi
+    if [[ -e $HOME/.vim/colors ]]; then
+         cp "$HOME/.dotfiles/vim/codeschool.vim $HOME/.vim/colors/codeschool.vim"
+    else 
+        echo "You don't seem to have a .vim/colors directory."
+    fi
 }
 
 get_dotfiles(){
@@ -51,7 +59,7 @@ get_dotfiles(){
 	git clone https://github.com/droo5ki/dotfiles.git 
     mv dotfiles .dotfiles 
     cd .dotfiles || exit
-    find "$(pwd) -name '.*rc' | cut -d '/' -f5 | xargs -I {} 'ln -snf $HOME/.dotfiles/{} $HOME/{}'"
+    find "$(pwd) -name '.*rc' | cut -d '/' -f5 | xargs -I {} ln -snf $HOME/.dotfiles/{} $HOME/{}"
 }
 
 install_oh_my_zsh(){
@@ -62,7 +70,7 @@ install_oh_my_zsh(){
 
 main(){
 
-    check_for_sudo 
+    #check_for_sudo 
 	check_for_brew_and_install
     install_oh_my_zsh
 	get_dotfiles
