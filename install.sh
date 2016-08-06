@@ -28,7 +28,7 @@ install_brew_stuff(){
     
     echo "Installing..."
     brew install git tmux python vim shellcheck reattach-to-user-namespace ctags
-    brew cask install google-chrome spectacle iterm2 atext caffeine
+    brew cask install google-chrome spectacle iterm2 atext caffeine encryptr
 }
 
 switch_default_app_links(){
