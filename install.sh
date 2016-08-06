@@ -27,7 +27,7 @@ check_for_brew_and_install(){ # there is an assumption here that the target syst
 install_brew_stuff(){
     
     echo "Installing..."
-    brew install git tmux python vim shellcheck reattach-to-user-namespace ctags
+    brew install git tmux python vim shellcheck reattach-to-user-namespace ctags tree 
     brew cask install google-chrome spectacle iterm2 atext caffeine encryptr
 }
 
