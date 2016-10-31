@@ -27,7 +27,7 @@ check_for_brew_and_install(){ # there is an assumption here that the target syst
 install_brew_stuff(){
     
     echo "Installing..."
-    brew install git tmux python vim shellcheck reattach-to-user-namespace ctags tree 
+    brew install git tmux python vim shellcheck reattach-to-user-namespace ctags tree golang
     brew cask install google-chrome spectacle iterm2 atext caffeine encryptr
 }
 
@@ -64,7 +64,9 @@ get_dotfiles(){
 	git clone https://github.com/droo5ki/dotfiles.git 
     mv dotfiles .dotfiles 
     find $HOME/.dotfiles -name '.*rc' | cut -d '/' -f5 | xargs -I {} ln -snf $HOME/.dotfiles/{} $HOME/{}
-    ln -snf $HOME/.tmux.conf $HOME/.tmux.com
+    ln -snf $HOME/.dotfiles/.tmux.conf $HOME/.tmux.conf
+    ln -snf $HOME/.dotfiles/git/.gitconfig $HOME/.gitconfig
+
 
 }
 
