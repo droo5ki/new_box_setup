@@ -91,13 +91,11 @@ install_oh_my_zsh(){
 main(){
     
     check_for_os
-    echo "$platform"
-	# check_for_brew_and_install
-    # install_oh_my_zsh
-	# get_dotfiles
-	# setup_vim
+	if [[ "$platform" = "Darwin" ]]; then
+        check_for_brew_and_install
+    install_oh_my_zsh
+	get_dotfiles
+	setup_vim
 
-
-}
 
 main 
