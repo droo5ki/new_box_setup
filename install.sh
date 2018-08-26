@@ -56,15 +56,18 @@ switch_default_app_links(){
 setup_vim(){
 
     if [[ -e $HOME/.vim/ ]]; then
-	    git clone "https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
+	    git clone "https://github.com/VundleVim/Vundle.vim.git" ~/.vim/bundle/Vundle.vim
     else
 	    mkdir "$HOME/.vim"
-	    git clone "https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
+	    git clone "https://github.com/VundleVim/Vundle.vim.git" ~/.vim/bundle/Vundle.vim
     fi
     if [[ -e $HOME/.vim/colors ]]; then
          cp "$HOME/.dotfiles/vim/codeschool.vim $HOME/.vim/colors/codeschool.vim"
-    else 
-        echo "You don't seem to have a .vim/colors directory."
+    else
+        echo "You don't seem to have a .vim/colors directory. Creating directory"
+        mkdir "$HOME/.vim/colors"
+        echo "Copying codeschool to vim colors directory"
+        cp "$HOME/.dotfiles/vim/codeschool.vim $HOME/.vim/colors/codeschool.vim"
     fi
 
 
