@@ -12,7 +12,19 @@ check_for_sudo() {
     fi
 }
 
-check_for_brew_and_install(){ # there is an assumption here that the target system has ruby installed. 
+check_for_os() {
+    
+    platform='unknown'
+    unamestr=`uname`
+    if [[ "$unamestr" = "Linux" ]]; then
+        platform='Linux'
+    elif [[ "$unamestr" = "Darwin" ]]; then
+        platform='Darwin'
+    fi
+}
+
+# ruby is required for brew install
+check_for_brew_and_install(){ 
 
 	if [[ -e /usr/local/bin/brew ]]; then
 		echo "Brew installed, moving on."
@@ -77,11 +89,13 @@ install_oh_my_zsh(){
 }
 
 main(){
-
-	check_for_brew_and_install
-    install_oh_my_zsh
-	get_dotfiles
-	setup_vim
+    
+    check_for_os
+    echo "$platform"
+	# check_for_brew_and_install
+    # install_oh_my_zsh
+	# get_dotfiles
+	# setup_vim
 
 
 }
