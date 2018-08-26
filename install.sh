@@ -96,6 +96,6 @@ main(){
     install_oh_my_zsh
 	get_dotfiles
 	setup_vim
-
+}
 
 main
