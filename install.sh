@@ -98,4 +98,4 @@ main(){
 	setup_vim
 
 
-main 
+main
