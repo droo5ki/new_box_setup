@@ -87,6 +87,10 @@ get_dotfiles(){
 
 install_oh_my_zsh(){
 
+    if [[ ! -e `which zsh` ]]; then
+        sudo apt install -y zsh
+    fi
+    
     if [[ -e `which curl` ]];
     then
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
