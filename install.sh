@@ -12,7 +12,7 @@ check_for_sudo() {
     fi
 }
 
-check_for_os() {
+check_for_os() {  
     
     platform='unknown'
     unamestr=`uname`
@@ -76,11 +76,10 @@ setup_vim(){
 get_dotfiles(){
 
     cd "$HOME" || exit
-	git clone https://github.com/droo5ki/dotfiles.git 
-    mv dotfiles .dotfiles 
+	git clone https://github.com/droo5ki/dotfiles.git .dotfiles
     find $HOME/.dotfiles -name '.*rc' | cut -d '/' -f5 | xargs -I {} ln -snf $HOME/.dotfiles/{} $HOME/{}
-    ln -snf $HOME/.dotfiles/.tmux.conf $HOME/.tmux.conf
-    ln -snf $HOME/.dotfiles/git/.gitconfig $HOME/.gitconfig
+    ln -snf $HOME/.dotfiles/.tmux.conf .tmux.conf
+    ln -snf $HOME/.dotfiles/git/.gitconfig .gitconfig
 
 
 }
