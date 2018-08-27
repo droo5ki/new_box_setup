@@ -105,9 +105,9 @@ main(){
 	if [[ "$platform" = "Darwin" ]]; then
         check_for_brew_and_install
     fi
-	get_dotfiles
 	setup_vim
     install_oh_my_zsh
+	get_dotfiles
 }
 
 main
