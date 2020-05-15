@@ -126,8 +126,13 @@ install_oh_my_zsh(){
 
 set_defaults(){
 
-    defaults write com.apple.screencapture location ~/Pictures/Screenshots
-
+    if [[ -d $HOME/Pictures/Screenshots ]]; 
+    then 
+        defaults write com.apple.screencapture location ~/Pictures/Screenshots
+    else
+        mkdir -p "$HOME/Pictures/Screenshots"
+        defaults write com.apple.screencapture location ~/Pictures/Screenshots
+    fi 
 }
 
 main(){
