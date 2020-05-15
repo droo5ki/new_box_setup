@@ -36,11 +36,34 @@ check_for_brew_and_install(){
     fi
 }
 
+install_virtualenv(){
+
+    if ! [[ -x /usr/local/bin/virtualenv ]]; then
+        pip3 install virtualenv
+    fi 
+
+}
+
 install_brew_stuff(){
     
     echo "Installing..."
-    brew install git tmux python vim shellcheck reattach-to-user-namespace ctags tree golang
-    brew cask install spectacle iterm2 slack bitwarden visual-studio-code cmake # cmake is needed for the YCM vim plugin
+    
+    brew install git \
+                 tmux \
+                 python \
+                 vim \
+                 shellcheck \
+                 reattach-to-user-namespace \
+                 ctags \
+                 tree \
+                 golang
+
+    brew cask install spectacle \
+                      iterm2 \
+                      slack \
+                      bitwarden \
+                      visual-studio-code \
+                      cmake # cmake is needed for the YCM vim plugin
 }
 
 switch_default_app_links(){
@@ -101,12 +124,22 @@ install_oh_my_zsh(){
     fi
 }
 
+set_defaults(){
+
+    defaults write com.apple.screencapture location ~/Pictures/Screenshots
+
+}
+
 main(){
     
     check_for_os
 	if [[ "$platform" = "Darwin" ]]; then
         check_for_brew_and_install
+        set_defaults
+    elif [[ "$platform" = "Linux" ]]; then
+        install_linux
     fi
+
     #get_dotfiles
     setup_vim
     install_oh_my_zsh
